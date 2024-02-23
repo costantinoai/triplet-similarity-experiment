@@ -24,25 +24,25 @@ Project Structure
 
 This simplified structure helps keep your project organized and maintainable:
 
-- `datasets/`: Store your datasets. For example, an "fmri_dataset" directory contains a sample CSV dataset and image files.
-- `docs/`: The documentation files. To open the documentation, open `./docs/_build/index.html`.
-- `examples/`: Explore sample projects to understand how to structure your own.
-- `modules/`: Contains Python modules for different functionalities. Subdirectories represent different modules.
-- `results/`: This folder can be used to store any results or outputs generated during experiments.
-- `test/`: Store your unfinished/untested scripts.
+- ``datasets/``: Store your datasets. For example, an "fmri_dataset" directory contains a sample CSV dataset and image files.
+- ``docs/``: The documentation files. To open the documentation, open `./docs/_build/index.html`.
+- ``examples/``: Explore sample projects to understand how to structure your own.
+- ``modules/``: Contains Python modules for different functionalities. Subdirectories represent different modules.
+- ``results/``: This folder can be used to store any results or outputs generated during experiments.
+- ``test/``: Store your unfinished/untested scripts.
 
 Modules Overview
 ----------------
 
 The Deep Learning and Neuroscience Template Repository is organized into several modules to facilitate code organization and modularity:
 
-- `modules.analysis_funcs`: Contains functions for analyzing neural network activations and conducting related analyses.
+- ``modules.analysis_funcs``: Contains functions for analyzing neural network activations and conducting related analyses.
 
-- `modules.helper_funcs`: Provides utility functions that are useful throughout your project.
+- ``modules.helper_funcs``: Provides utility functions that are useful throughout your project.
 
-- `modules.models`: Includes model-related code, such as neural network architectures and training configurations.
+- ``modules.models``: Includes model-related code, such as neural network architectures and training configurations.
 
-- `modules.net_funcs`: Contains functions for dataset handling, network utilities, and training/testing procedures.
+- ``modules.net_funcs``: Contains functions for dataset handling, network utilities, and training/testing procedures.
 
 Each module serves a specific purpose, making it easier to navigate and work with the template for your projects.
 
@@ -81,24 +81,24 @@ Before you can start using this template for your deep learning and neuroscience
 
 3. **Install Dependencies**: Install the required Python packages. There are two ways to install these dependencies:
 
-   The `environment.yml` file is the recommended way to replicate the environment as it ensures that all dependencies, including those that need to be installed from specific Conda channels, are correctly set up.
+   The ``environment.yml`` file is the recommended way to replicate the environment as it ensures that all dependencies, including those that need to be installed from specific Conda channels, are correctly set up.
 	   
-   To create and activate the environment using the `environment.yml` file, run the following commands:
+   To create and activate the environment using the ``environment.yml`` file, run the following commands:
 	   
    .. code-block:: bash
 
-   conda env create -f environment.yml
-   conda activate dnn_template
+       conda env create -f environment.yml
+       conda activate dnn_template
 
-   This will create a new Conda environment named `dnn_template` and activate it.
+   This will create a new Conda environment named ``dnn_template`` and activate it.
 
-   Alternatively, you can use the `requirements.txt` file to install Python packages. However, note that this method might not install all dependencies correctly, as some packages are best installed through Conda.
+   Alternatively, you can use the ``requirements.txt`` file to install Python packages. However, note that this method might not install all dependencies correctly, as some packages are best installed through Conda.
 
-   To install the Python packages from the `requirements.txt` file using pip, run:
+   To install the Python packages from the ``requirements.txt`` file using pip, run:
 
    .. code-block:: bash
 
-   pip install -r requirements.txt
+     pip install -r requirements.txt
 
    For packages that need to be installed via Conda, especially those requiring specific channels (like `pytorch`), refer to the `environment.yml` file for the correct installation commands and channels.
 
@@ -190,7 +190,7 @@ When modifying the codebase or adding new files, it's crucial to update the docu
    - **Create a New `.rst` File**: For each new module or file, create a new `.rst` file in the `./docs/source` directory. This file should include the module's docstrings and any additional explanatory text.
    
    - **Update the toctree in `index.rst`**:
-     Edit the `index.rst` file in the `./docs/source` directory to include the new `.rst` file in the toctree directive.
+     Edit the ``index.rst`` file in the ``./docs/source`` directory to include the new rst file in the ``toctree`` directive.
 
      .. code-block:: rst
 
