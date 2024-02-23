@@ -3,7 +3,7 @@
 Introduction
 ============
 
-Welcome to the Deep Learning and Neuroscience Template Repository!
+Welcome to the Triplets Similarity Experiment repository!
 ------------------------------------------------------------------
 
 This repository serves as a versatile starting point for your deep learning and neuroscience projects. This template provides a solid foundation for building, training, and analyzing neural networks and conducting neuroscience experiments.
