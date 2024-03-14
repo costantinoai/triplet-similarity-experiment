@@ -121,6 +121,7 @@ class BatchGenerator(object):
         if self.sampling_method == 'soft':
             rnd_perm = rnd_perm[:int(len(rnd_perm) * self.p)]
         return triplets[rnd_perm]
+    
 
     def get_batches(self, I:torch.Tensor, triplets:torch.Tensor) -> Iterator[torch.Tensor]:
         if not isinstance(self.sampling_method, type(None)):
@@ -177,7 +178,7 @@ def load_data(device:torch.device, triplets_dir:str, inference:bool=False) -> Tu
 
 def get_nitems(train_triplets:torch.Tensor) -> int:
     #number of unique items in the data matrix
-    n_items = torch.max(train_triplets).item()
+    n_items = torch.max(train_triplets).item() + 1
     if torch.min(train_triplets).item() == 0:
         n_items += 1
     return n_items

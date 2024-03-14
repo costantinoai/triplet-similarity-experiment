@@ -25,9 +25,9 @@ from collections import defaultdict
 from scipy.stats import linregress
 from torch.optim import Adam, AdamW
 
-import modules.spose.utils as utils
-from modules.spose.plotting import *
-from modules.spose.models.model import *
+import utils as utils
+from plotting import *
+from models.model import *
 
 os.environ['PYTHONIOENCODING']='UTF-8'
 os.environ['CUDA_LAUNCH_BLOCKING']=str(1)
@@ -111,7 +111,7 @@ def initialize_args():
             self.sampling_method = 'normal'
             self.p = None  # Relevant only if 'soft' sampling_method is used
             self.resume = False  # Boolean flags default to False
-            self.device = 'cuda:0'
+            self.device = 'cpu'
             self.rnd_seed = 42
             self.distance_metric = 'dot'
             self.early_stopping = False
