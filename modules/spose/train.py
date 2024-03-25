@@ -112,7 +112,7 @@ def initialize_args():
             self.p = None  # Relevant only if 'soft' sampling_method is used
             self.resume = False  # Boolean flags default to False
             self.device = 'cpu'
-            self.rnd_seed = 42
+            self.rnd_seed = 60
             self.distance_metric = 'dot'
             self.early_stopping = False
             self.num_threads = 20

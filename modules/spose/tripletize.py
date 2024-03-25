@@ -3,6 +3,8 @@
 
 import argparse
 import os
+import sys
+import logging
 import random
 import re
 import torch
@@ -29,6 +31,37 @@ def parseargs():
     aa('--rnd_seed', type=int, default=42,
         help='random seed for reproducibility')
     args = parser.parse_args()
+    return args
+
+def initialize_args():
+    """
+    Initialize arguments based on the mode of execution (Command Line vs IDE).
+
+    When executed via command line, it parses the provided command-line arguments.
+    If executed from an IDE, it sets default values for the arguments.
+
+    Returns:
+        argparse.Namespace or IDEArgs: Argument object based on the mode of execution.
+    """
+
+    class IDEArgs:
+        def __init__(self):
+            self.in_path = './test/test_results/triplets/dataset/all_triplets.npy'
+            self.out_path = './test/test_results/triplets/dataset/'
+            self.method = 'deterministic'  
+            self.temperature = None # Only when using probabilistic method
+            self.n_samples = 1000
+            self.rnd_seed = 42
+
+    # Check if the script is executed via command line
+    if len(sys.argv) > 1:
+        # Parse command-line arguments using previously defined parseargs() function
+        args = parseargs()
+        logging.log(logging.INFO, "Parsed command-line arguments.")
+    else:
+        # Use IDEArgs class for default configurations when executing in IDE
+        args = IDEArgs()
+
     return args
 
 def load_data(in_path:str) -> np.ndarray:
@@ -122,7 +155,7 @@ def tripletize_(
 
 if __name__ == "__main__":
     #parse all arguments
-    args = parseargs()
+    args = initialize_args()
     np.random.seed(args.rnd_seed)
     random.seed(args.rnd_seed)
     #tripletize data
