@@ -1,0 +1,15 @@
+PyTorch Version:  2.2.1+cpu
+Torchvision Version:  0.17.1+cpu
+CUDA device(s):  0
+Pillow version:  10.2.0
+Using device: cpu, Number of GPUs: 0
+"save_logs": "True"
+"run_id": "20240326-173027_extract-net-activations"
+"seed": "42"
+"num": "40"
+"prop_train": "0.9"
+root - INFO - Started processing.
+
+Dummy data generated and stored in test\test_results\triplets\dataset.
+
+root - INFO - Completed processing.
