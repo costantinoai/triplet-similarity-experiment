@@ -49,7 +49,7 @@ def initialize_args():
             self.in_path = './test/test_results/triplets/dataset/all_triplets.npy'
             self.out_path = './test/test_results/triplets/dataset/'
             self.method = 'deterministic'  
-            self.temperature = None # Only when using probabilistic method
+            self.temperature = 0.4 # Only when using probabilistic method
             self.n_samples = 1000
             self.rnd_seed = 42
 
