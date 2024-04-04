@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2022.2.5),
-    on maart 10, 2024, at 21:06
+    on maart 31, 2024, at 18:06
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -28,22 +28,6 @@ import sys  # to get file system encoding
 import psychopy.iohub as io
 from psychopy.hardware import keyboard
 
-# Run 'Before Experiment' code from code
-import pandas as pd
-# Set number of trials you want to show for practice/main parts of experiment
-nPract = 10
-nMain = 10
-
-nTotal = nPract + nMain
-# Load all possible conditions from triplets.csv
-df = pd.read_csv('triplets.csv')
-sampled = df.sample(nTotal)
-# Sample practice trials and main trials
-samplePract = sampled[:nPract]
-sampleMain = sampled[nPract:nTotal]
-# Store these trials in separate files that are to be used later on
-samplePract.to_csv('practice_triplets.csv', index=False)
-sampleMain.to_csv('main_triplets.csv', index=False)
 
 
 # Ensure that relative paths start from the same directory as this script
@@ -53,7 +37,7 @@ os.chdir(_thisDir)
 psychopyVersion = '2022.2.5'
 expName = 'odd_one_out_experiment'  # from the Builder filename that created this script
 expInfo = {
-    'participant': f"{randint(0, 999999):06.0f}",
+    'participant': '0000',
     'session': '001',
 }
 # --- Show participant info dialog --
@@ -70,7 +54,7 @@ filename = _thisDir + os.sep + u'data/' + expInfo['participant'] + '/%s_%s_%s' %
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath='C:\\Users\\tomva\\OneDrive\\KU Leuven\\Master Theory and Research\\StudentJob\\Triplet similarity experiment\\triplet-similarity-experiment\\test\\odd_one_out_experiment.py',
+    originPath='C:\\Users\\tomva\\OneDrive\\KU Leuven\\Master Theory and Research\\StudentJob\\Triplet similarity experiment\\Pavlovia\\odd_one_out_experiment.py',
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 # save a log file for detail verbose info
@@ -84,7 +68,7 @@ frameTolerance = 0.001  # how close to onset before 'same' frame
 
 # --- Setup the Window ---
 win = visual.Window(
-    size=[1536, 864], fullscr=True, screen=1, 
+    size=[1920, 1080], fullscr=True, screen=1, 
     winType='pyglet', allowStencil=False,
     monitor='testMonitor', color=[0,0,0], colorSpace='rgb',
     blendMode='avg', useFBO=True, 
@@ -113,33 +97,57 @@ defaultKeyboard = keyboard.Keyboard(backend='iohub')
 
 # --- Initialize components for Routine "welcome" ---
 welcomeText = visual.TextStim(win=win, name='welcomeText',
-    text="Welcome, in this task you will be presented with three chess scenario's, side-by-side.\n\nIt is your task to select the odd-one-out. In other words, there is one scenario the most different when comparing to the other two scenario's.\nTo select the odd-one-out you can use your mouse. Click on the scenario you think is the most distinct. \n\nWe will start with a few practice rounds.\n\nPress <space> to continue...",
+    text="Welcome, in this experiment you will be presented with three chess scenario's, side-by-side.\n\nIt is your task to select the odd-one-out. In other words, choose the one you think is the most different when comparing to the other two scenario's.\n\nTo select the odd-one-out you can use your mouse. Click on the scenario you think is the most distinct. \n\nWe will first show you an example of a single trial. It is not necessary to pay attention to the correctness of the decision, rather focus on the general lay-out of the task.\n\nAfter the example you can practice the task yourself.\n\nPress <space> to continue...",
     font='Open Sans',
-    pos=(0, 0), height=0.04, wrapWidth=None, ori=0.0, 
+    pos=(0, 0), height=0.03, wrapWidth=None, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
     languageStyle='LTR',
     depth=0.0);
 key_resp = keyboard.Keyboard()
 
+# --- Initialize components for Routine "example" ---
+instr_image = visual.ImageStim(
+    win=win,
+    name='instr_image', 
+    image='sin', mask=None, anchor='center',
+    ori=0.0, pos=(0, 0), size=(1.7, 1),
+    color=[1,1,1], colorSpace='rgb', opacity=None,
+    flipHoriz=False, flipVert=False,
+    texRes=256.0, interpolate=True, depth=0.0)
+text = visual.TextStim(win=win, name='text',
+    text="Let's say you think the most distinct scenario is the one in the middle.\nYou can then use your mouse to select this specific scenario as the odd-one-out. \n\nPress <space> to continue to the practice trials...",
+    font='Open Sans',
+    pos=(0, -0.35), height=0.03, wrapWidth=None, ori=0.0, 
+    color='white', colorSpace='rgb', opacity=None, 
+    languageStyle='LTR',
+    depth=-1.0);
+key_example = keyboard.Keyboard()
+
 # --- Initialize components for Routine "practice" ---
+fixation_practice = visual.ShapeStim(
+    win=win, name='fixation_practice', vertices='cross',
+    size=(0.05, 0.05),
+    ori=0.0, pos=(0, 0), anchor='center',
+    lineWidth=1.0,     colorSpace='rgb',  lineColor='white', fillColor='white',
+    opacity=None, depth=0.0, interpolate=True)
 frame1 = visual.Rect(
     win=win, name='frame1',
     width=(0.45, 0.45)[0], height=(0.45, 0.45)[1],
     ori=0.0, pos=(-0.5, 0), anchor='center',
     lineWidth=2.0,     colorSpace='rgb',  lineColor='white', fillColor=[0.0000, 0.0000, 0.0000],
-    opacity=None, depth=0.0, interpolate=True)
+    opacity=None, depth=-1.0, interpolate=True)
 frame2 = visual.Rect(
     win=win, name='frame2',
     width=(0.45, 0.45)[0], height=(0.45, 0.45)[1],
     ori=0.0, pos=(0,0), anchor='center',
     lineWidth=2.0,     colorSpace='rgb',  lineColor='white', fillColor=[0.0000, 0.0000, 0.0000],
-    opacity=None, depth=0.0, interpolate=True)
+    opacity=None, depth=-2.0, interpolate=True)
 frame3 = visual.Rect(
     win=win, name='frame3',
     width=(0.45, 0.45)[0], height=(0.45, 0.45)[1],
     ori=0.0, pos=(0.5, 0), anchor='center',
     lineWidth=2.0,     colorSpace='rgb',  lineColor='white', fillColor=[0.0000, 0.0000, 0.0000],
-    opacity=None, depth=0.0, interpolate=True)
+    opacity=None, depth=-3.0, interpolate=True)
 stim1_pract = visual.ImageStim(
     win=win,
     name='stim1_pract', 
@@ -147,7 +155,7 @@ stim1_pract = visual.ImageStim(
     ori=0.0, pos=(-0.5, 0), size=(0.4, 0.4),
     color=[1,1,1], colorSpace='rgb', opacity=None,
     flipHoriz=False, flipVert=False,
-    texRes=128.0, interpolate=True, depth=-3.0)
+    texRes=128.0, interpolate=True, depth=-4.0)
 stim2_pract = visual.ImageStim(
     win=win,
     name='stim2_pract', 
@@ -155,7 +163,7 @@ stim2_pract = visual.ImageStim(
     ori=0.0, pos=(0, 0), size=(0.4, 0.4),
     color=[1,1,1], colorSpace='rgb', opacity=None,
     flipHoriz=False, flipVert=False,
-    texRes=128.0, interpolate=True, depth=-4.0)
+    texRes=128.0, interpolate=True, depth=-5.0)
 stim3_pract = visual.ImageStim(
     win=win,
     name='stim3_pract', 
@@ -163,7 +171,7 @@ stim3_pract = visual.ImageStim(
     ori=0.0, pos=(0.5, 0), size=(0.4, 0.4),
     color=[1,1,1], colorSpace='rgb', opacity=None,
     flipHoriz=False, flipVert=False,
-    texRes=128.0, interpolate=True, depth=-5.0)
+    texRes=128.0, interpolate=True, depth=-6.0)
 mouse_pract = event.Mouse(win=win)
 x, y = [None, None]
 mouse_pract.mouseClock = core.Clock()
@@ -173,11 +181,11 @@ question_text = visual.TextStim(win=win, name='question_text',
     pos=(0, 0.4), height=0.05, wrapWidth=None, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
     languageStyle='LTR',
-    depth=-7.0);
+    depth=-8.0);
 
 # --- Initialize components for Routine "pause" ---
 pauseText = visual.TextStim(win=win, name='pauseText',
-    text='We have finished practicing. \n\nPress <space> to continue...',
+    text="We have finished practicing!\n\nLet's start with the experiment, the task remains the same as it was during practice.\n\nPress <space> to continue...",
     font='Open Sans',
     pos=(0, 0), height=0.04, wrapWidth=None, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
@@ -186,24 +194,30 @@ pauseText = visual.TextStim(win=win, name='pauseText',
 key_resp_pause = keyboard.Keyboard()
 
 # --- Initialize components for Routine "experiment" ---
+fixation_main = visual.ShapeStim(
+    win=win, name='fixation_main', vertices='cross',
+    size=(0.05, 0.05),
+    ori=0.0, pos=(0, 0), anchor='center',
+    lineWidth=1.0,     colorSpace='rgb',  lineColor='white', fillColor='white',
+    opacity=None, depth=0.0, interpolate=True)
 frame1_main = visual.Rect(
     win=win, name='frame1_main',
     width=(0.45, 0.45)[0], height=(0.45, 0.45)[1],
     ori=0.0, pos=(-0.5, 0), anchor='center',
     lineWidth=2.0,     colorSpace='rgb',  lineColor='white', fillColor=[0.0000, 0.0000, 0.0000],
-    opacity=None, depth=0.0, interpolate=True)
+    opacity=None, depth=-1.0, interpolate=True)
 frame2_main = visual.Rect(
     win=win, name='frame2_main',
     width=(0.45, 0.45)[0], height=(0.45, 0.45)[1],
     ori=0.0, pos=(0, 0), anchor='center',
     lineWidth=2.0,     colorSpace='rgb',  lineColor='white', fillColor=[0.0000, 0.0000, 0.0000],
-    opacity=None, depth=0.0, interpolate=True)
+    opacity=None, depth=-2.0, interpolate=True)
 frame3_main = visual.Rect(
     win=win, name='frame3_main',
     width=(0.45, 0.45)[0], height=(0.45, 0.45)[1],
     ori=0.0, pos=(0.5, 0), anchor='center',
     lineWidth=2.0,     colorSpace='rgb',  lineColor='white', fillColor=[0.0000, 0.0000, 0.0000],
-    opacity=None, depth=0.0, interpolate=True)
+    opacity=None, depth=-3.0, interpolate=True)
 stim1_main = visual.ImageStim(
     win=win,
     name='stim1_main', 
@@ -211,7 +225,7 @@ stim1_main = visual.ImageStim(
     ori=0.0, pos=(-0.5, 0), size=(0.4, 0.4),
     color=[1,1,1], colorSpace='rgb', opacity=None,
     flipHoriz=False, flipVert=False,
-    texRes=128.0, interpolate=True, depth=-3.0)
+    texRes=128.0, interpolate=True, depth=-4.0)
 stim2_main = visual.ImageStim(
     win=win,
     name='stim2_main', 
@@ -219,7 +233,7 @@ stim2_main = visual.ImageStim(
     ori=0.0, pos=(0, 0), size=(0.4, 0.4),
     color=[1,1,1], colorSpace='rgb', opacity=None,
     flipHoriz=False, flipVert=False,
-    texRes=128.0, interpolate=True, depth=-4.0)
+    texRes=128.0, interpolate=True, depth=-5.0)
 stim3_main = visual.ImageStim(
     win=win,
     name='stim3_main', 
@@ -227,7 +241,7 @@ stim3_main = visual.ImageStim(
     ori=0.0, pos=(0.5, 0), size=(0.4, 0.4),
     color=[1,1,1], colorSpace='rgb', opacity=None,
     flipHoriz=False, flipVert=False,
-    texRes=128.0, interpolate=True, depth=-5.0)
+    texRes=128.0, interpolate=True, depth=-6.0)
 mouse_main = event.Mouse(win=win)
 x, y = [None, None]
 mouse_main.mouseClock = core.Clock()
@@ -237,11 +251,11 @@ question_text_2 = visual.TextStim(win=win, name='question_text_2',
     pos=(0, 0.4), height=0.05, wrapWidth=None, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
     languageStyle='LTR',
-    depth=-7.0);
+    depth=-8.0);
 
 # --- Initialize components for Routine "exit" ---
 text_exit = visual.TextStim(win=win, name='text_exit',
-    text='That was it!\n\nThank you for your time and patience.\n\nPress <space> to leave the experiment.',
+    text='That was it!\n\nThank you for your time and attention.\n\nPress <space> to leave the experiment.',
     font='Open Sans',
     pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
@@ -350,10 +364,118 @@ thisExp.nextEntry()
 # the Routine "welcome" was not non-slip safe, so reset the non-slip timer
 routineTimer.reset()
 
+# --- Prepare to start Routine "example" ---
+continueRoutine = True
+routineForceEnded = False
+# update component parameters for each repeat
+key_example.keys = []
+key_example.rt = []
+_key_example_allKeys = []
+# keep track of which components have finished
+exampleComponents = [instr_image, text, key_example]
+for thisComponent in exampleComponents:
+    thisComponent.tStart = None
+    thisComponent.tStop = None
+    thisComponent.tStartRefresh = None
+    thisComponent.tStopRefresh = None
+    if hasattr(thisComponent, 'status'):
+        thisComponent.status = NOT_STARTED
+# reset timers
+t = 0
+_timeToFirstFrame = win.getFutureFlipTime(clock="now")
+frameN = -1
+
+# --- Run Routine "example" ---
+while continueRoutine:
+    # get current time
+    t = routineTimer.getTime()
+    tThisFlip = win.getFutureFlipTime(clock=routineTimer)
+    tThisFlipGlobal = win.getFutureFlipTime(clock=None)
+    frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+    # update/draw components on each frame
+    
+    # *instr_image* updates
+    if instr_image.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
+        # keep track of start time/frame for later
+        instr_image.frameNStart = frameN  # exact frame index
+        instr_image.tStart = t  # local t and not account for scr refresh
+        instr_image.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(instr_image, 'tStartRefresh')  # time at next scr refresh
+        # add timestamp to datafile
+        thisExp.timestampOnFlip(win, 'instr_image.started')
+        instr_image.setAutoDraw(True)
+    if instr_image.status == STARTED:  # only update if drawing
+        instr_image.setImage('instructFrame1.png', log=False)
+    
+    # *text* updates
+    if text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        # keep track of start time/frame for later
+        text.frameNStart = frameN  # exact frame index
+        text.tStart = t  # local t and not account for scr refresh
+        text.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(text, 'tStartRefresh')  # time at next scr refresh
+        text.setAutoDraw(True)
+    
+    # *key_example* updates
+    waitOnFlip = False
+    if key_example.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        # keep track of start time/frame for later
+        key_example.frameNStart = frameN  # exact frame index
+        key_example.tStart = t  # local t and not account for scr refresh
+        key_example.tStartRefresh = tThisFlipGlobal  # on global time
+        win.timeOnFlip(key_example, 'tStartRefresh')  # time at next scr refresh
+        # add timestamp to datafile
+        thisExp.timestampOnFlip(win, 'key_example.started')
+        key_example.status = STARTED
+        # keyboard checking is just starting
+        waitOnFlip = True
+        win.callOnFlip(key_example.clock.reset)  # t=0 on next screen flip
+        win.callOnFlip(key_example.clearEvents, eventType='keyboard')  # clear events on next screen flip
+    if key_example.status == STARTED and not waitOnFlip:
+        theseKeys = key_example.getKeys(keyList=['space'], waitRelease=False)
+        _key_example_allKeys.extend(theseKeys)
+        if len(_key_example_allKeys):
+            key_example.keys = _key_example_allKeys[-1].name  # just the last key pressed
+            key_example.rt = _key_example_allKeys[-1].rt
+            # a response ends the routine
+            continueRoutine = False
+    
+    # check for quit (typically the Esc key)
+    if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
+        core.quit()
+    
+    # check if all components have finished
+    if not continueRoutine:  # a component has requested a forced-end of Routine
+        routineForceEnded = True
+        break
+    continueRoutine = False  # will revert to True if at least one component still running
+    for thisComponent in exampleComponents:
+        if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+            continueRoutine = True
+            break  # at least one component has not yet finished
+    
+    # refresh the screen
+    if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+        win.flip()
+
+# --- Ending Routine "example" ---
+for thisComponent in exampleComponents:
+    if hasattr(thisComponent, "setAutoDraw"):
+        thisComponent.setAutoDraw(False)
+# check responses
+if key_example.keys in ['', [], None]:  # No response was made
+    key_example.keys = None
+thisExp.addData('key_example.keys',key_example.keys)
+if key_example.keys != None:  # we had a response
+    thisExp.addData('key_example.rt', key_example.rt)
+thisExp.nextEntry()
+# the Routine "example" was not non-slip safe, so reset the non-slip timer
+routineTimer.reset()
+
 # set up handler to look after randomisation of conditions etc
-practiceTrials = data.TrialHandler(nReps=1.0, method='sequential', 
+practiceTrials = data.TrialHandler(nReps=1.0, method='random', 
     extraInfo=expInfo, originPath=-1,
-    trialList=data.importConditions('practice_triplets.csv'),
+    trialList=data.importConditions('triplets.csv'),
     seed=None, name='practiceTrials')
 thisExp.addLoop(practiceTrials)  # add the loop to the experiment
 thisPracticeTrial = practiceTrials.trialList[0]  # so we can initialise stimuli with some values
@@ -373,9 +495,9 @@ for thisPracticeTrial in practiceTrials:
     continueRoutine = True
     routineForceEnded = False
     # update component parameters for each repeat
-    stim1_pract.setImage('../datasets/fmri_dataset/images/' + Stim1)
-    stim2_pract.setImage('../datasets/fmri_dataset/images/' + Stim2)
-    stim3_pract.setImage('../datasets/fmri_dataset/images/' + Stim3)
+    stim1_pract.setImage('datasets/fmri_dataset/images/' + Stim1)
+    stim2_pract.setImage('datasets/fmri_dataset/images/' + Stim2)
+    stim3_pract.setImage('datasets/fmri_dataset/images/' + Stim3)
     # setup some python lists for storing info about the mouse_pract
     mouse_pract.x = []
     mouse_pract.y = []
@@ -385,8 +507,11 @@ for thisPracticeTrial in practiceTrials:
     mouse_pract.time = []
     mouse_pract.clicked_name = []
     gotValidClick = False  # until a click is received
+    # Run 'Begin Routine' code from code_pract
+    
+    
     # keep track of which components have finished
-    practiceComponents = [frame1, frame2, frame3, stim1_pract, stim2_pract, stim3_pract, mouse_pract, question_text]
+    practiceComponents = [fixation_practice, frame1, frame2, frame3, stim1_pract, stim2_pract, stim3_pract, mouse_pract, question_text]
     for thisComponent in practiceComponents:
         thisComponent.tStart = None
         thisComponent.tStop = None
@@ -408,8 +533,28 @@ for thisPracticeTrial in practiceTrials:
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
         
+        # *fixation_practice* updates
+        if fixation_practice.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            fixation_practice.frameNStart = frameN  # exact frame index
+            fixation_practice.tStart = t  # local t and not account for scr refresh
+            fixation_practice.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(fixation_practice, 'tStartRefresh')  # time at next scr refresh
+            # add timestamp to datafile
+            thisExp.timestampOnFlip(win, 'fixation_practice.started')
+            fixation_practice.setAutoDraw(True)
+        if fixation_practice.status == STARTED:
+            # is it time to stop? (based on global clock, using actual start)
+            if tThisFlipGlobal > fixation_practice.tStartRefresh + 0.5-frameTolerance:
+                # keep track of stop time/frame for later
+                fixation_practice.tStop = t  # not accounting for scr refresh
+                fixation_practice.frameNStop = frameN  # exact frame index
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'fixation_practice.stopped')
+                fixation_practice.setAutoDraw(False)
+        
         # *frame1* updates
-        if frame1.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
+        if frame1.status == NOT_STARTED and tThisFlip >= 0.5-frameTolerance:
             # keep track of start time/frame for later
             frame1.frameNStart = frameN  # exact frame index
             frame1.tStart = t  # local t and not account for scr refresh
@@ -420,7 +565,7 @@ for thisPracticeTrial in practiceTrials:
             frame1.setOpacity(None, log=False)
         
         # *frame2* updates
-        if frame2.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
+        if frame2.status == NOT_STARTED and tThisFlip >= 0.5-frameTolerance:
             # keep track of start time/frame for later
             frame2.frameNStart = frameN  # exact frame index
             frame2.tStart = t  # local t and not account for scr refresh
@@ -431,7 +576,7 @@ for thisPracticeTrial in practiceTrials:
             frame2.setOpacity(None, log=False)
         
         # *frame3* updates
-        if frame3.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
+        if frame3.status == NOT_STARTED and tThisFlip >= 0.5-frameTolerance:
             # keep track of start time/frame for later
             frame3.frameNStart = frameN  # exact frame index
             frame3.tStart = t  # local t and not account for scr refresh
@@ -442,7 +587,7 @@ for thisPracticeTrial in practiceTrials:
             frame3.setOpacity(None, log=False)
         
         # *stim1_pract* updates
-        if stim1_pract.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        if stim1_pract.status == NOT_STARTED and tThisFlip >= 0.5-frameTolerance:
             # keep track of start time/frame for later
             stim1_pract.frameNStart = frameN  # exact frame index
             stim1_pract.tStart = t  # local t and not account for scr refresh
@@ -453,7 +598,7 @@ for thisPracticeTrial in practiceTrials:
             stim1_pract.setAutoDraw(True)
         
         # *stim2_pract* updates
-        if stim2_pract.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        if stim2_pract.status == NOT_STARTED and tThisFlip >= 0.5-frameTolerance:
             # keep track of start time/frame for later
             stim2_pract.frameNStart = frameN  # exact frame index
             stim2_pract.tStart = t  # local t and not account for scr refresh
@@ -464,7 +609,7 @@ for thisPracticeTrial in practiceTrials:
             stim2_pract.setAutoDraw(True)
         
         # *stim3_pract* updates
-        if stim3_pract.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        if stim3_pract.status == NOT_STARTED and tThisFlip >= 0.5-frameTolerance:
             # keep track of start time/frame for later
             stim3_pract.frameNStart = frameN  # exact frame index
             stim3_pract.tStart = t  # local t and not account for scr refresh
@@ -474,7 +619,7 @@ for thisPracticeTrial in practiceTrials:
             thisExp.timestampOnFlip(win, 'stim3_pract.started')
             stim3_pract.setAutoDraw(True)
         # *mouse_pract* updates
-        if mouse_pract.status == NOT_STARTED and t >= 0.0-frameTolerance:
+        if mouse_pract.status == NOT_STARTED and t >= 0.5-frameTolerance:
             # keep track of start time/frame for later
             mouse_pract.frameNStart = frameN  # exact frame index
             mouse_pract.tStart = t  # local t and not account for scr refresh
@@ -514,7 +659,7 @@ for thisPracticeTrial in practiceTrials:
                         continueRoutine = False  # abort routine on response
         
         # *question_text* updates
-        if question_text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        if question_text.status == NOT_STARTED and tThisFlip >= 0.5-frameTolerance:
             # keep track of start time/frame for later
             question_text.frameNStart = frameN  # exact frame index
             question_text.tStart = t  # local t and not account for scr refresh
@@ -532,7 +677,6 @@ for thisPracticeTrial in practiceTrials:
             
         if stim2_pract.contains(mouseX, mouseY):
             frame2.opacity = 1
-            # Add code here for screenshot
         else:
             frame2.opacity = 0
             
@@ -540,6 +684,10 @@ for thisPracticeTrial in practiceTrials:
             frame3.opacity = 1
         else:
             frame3.opacity = 0
+            
+        # Stop routine after 5 trials  
+        if practiceTrials.thisN > 5:
+            continueRoutine = False
         
         # check for quit (typically the Esc key)
         if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
@@ -678,9 +826,9 @@ for thisComponent in pauseComponents:
 routineTimer.reset()
 
 # set up handler to look after randomisation of conditions etc
-mainTrials = data.TrialHandler(nReps=1.0, method='sequential', 
+mainTrials = data.TrialHandler(nReps=1.0, method='fullRandom', 
     extraInfo=expInfo, originPath=-1,
-    trialList=data.importConditions('main_triplets.csv'),
+    trialList=data.importConditions('triplets.csv', selection='0:10'),
     seed=None, name='mainTrials')
 thisExp.addLoop(mainTrials)  # add the loop to the experiment
 thisMainTrial = mainTrials.trialList[0]  # so we can initialise stimuli with some values
@@ -700,9 +848,9 @@ for thisMainTrial in mainTrials:
     continueRoutine = True
     routineForceEnded = False
     # update component parameters for each repeat
-    stim1_main.setImage('../datasets/fmri_dataset/images/' + Stim1)
-    stim2_main.setImage('../datasets/fmri_dataset/images/' + Stim2)
-    stim3_main.setImage('../datasets/fmri_dataset/images/' + Stim3)
+    stim1_main.setImage('datasets/fmri_dataset/images/' + Stim1)
+    stim2_main.setImage('datasets/fmri_dataset/images/' + Stim2)
+    stim3_main.setImage('datasets/fmri_dataset/images/' + Stim3)
     # setup some python lists for storing info about the mouse_main
     mouse_main.x = []
     mouse_main.y = []
@@ -712,8 +860,11 @@ for thisMainTrial in mainTrials:
     mouse_main.time = []
     mouse_main.clicked_name = []
     gotValidClick = False  # until a click is received
+    # Run 'Begin Routine' code from code_main
+    # Change number of trials after import and randomization of data
+    mainTrials.nTotal = 10
     # keep track of which components have finished
-    experimentComponents = [frame1_main, frame2_main, frame3_main, stim1_main, stim2_main, stim3_main, mouse_main, question_text_2]
+    experimentComponents = [fixation_main, frame1_main, frame2_main, frame3_main, stim1_main, stim2_main, stim3_main, mouse_main, question_text_2]
     for thisComponent in experimentComponents:
         thisComponent.tStart = None
         thisComponent.tStop = None
@@ -735,8 +886,28 @@ for thisMainTrial in mainTrials:
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
         
+        # *fixation_main* updates
+        if fixation_main.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            fixation_main.frameNStart = frameN  # exact frame index
+            fixation_main.tStart = t  # local t and not account for scr refresh
+            fixation_main.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(fixation_main, 'tStartRefresh')  # time at next scr refresh
+            # add timestamp to datafile
+            thisExp.timestampOnFlip(win, 'fixation_main.started')
+            fixation_main.setAutoDraw(True)
+        if fixation_main.status == STARTED:
+            # is it time to stop? (based on global clock, using actual start)
+            if tThisFlipGlobal > fixation_main.tStartRefresh + 0.5-frameTolerance:
+                # keep track of stop time/frame for later
+                fixation_main.tStop = t  # not accounting for scr refresh
+                fixation_main.frameNStop = frameN  # exact frame index
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'fixation_main.stopped')
+                fixation_main.setAutoDraw(False)
+        
         # *frame1_main* updates
-        if frame1_main.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
+        if frame1_main.status == NOT_STARTED and tThisFlip >= 0.5-frameTolerance:
             # keep track of start time/frame for later
             frame1_main.frameNStart = frameN  # exact frame index
             frame1_main.tStart = t  # local t and not account for scr refresh
@@ -747,7 +918,7 @@ for thisMainTrial in mainTrials:
             frame1_main.setOpacity(None, log=False)
         
         # *frame2_main* updates
-        if frame2_main.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
+        if frame2_main.status == NOT_STARTED and tThisFlip >= 0.5-frameTolerance:
             # keep track of start time/frame for later
             frame2_main.frameNStart = frameN  # exact frame index
             frame2_main.tStart = t  # local t and not account for scr refresh
@@ -758,7 +929,7 @@ for thisMainTrial in mainTrials:
             frame2_main.setOpacity(None, log=False)
         
         # *frame3_main* updates
-        if frame3_main.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
+        if frame3_main.status == NOT_STARTED and tThisFlip >= 0.5-frameTolerance:
             # keep track of start time/frame for later
             frame3_main.frameNStart = frameN  # exact frame index
             frame3_main.tStart = t  # local t and not account for scr refresh
@@ -769,7 +940,7 @@ for thisMainTrial in mainTrials:
             frame3_main.setOpacity(None, log=False)
         
         # *stim1_main* updates
-        if stim1_main.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        if stim1_main.status == NOT_STARTED and tThisFlip >= 0.5-frameTolerance:
             # keep track of start time/frame for later
             stim1_main.frameNStart = frameN  # exact frame index
             stim1_main.tStart = t  # local t and not account for scr refresh
@@ -780,7 +951,7 @@ for thisMainTrial in mainTrials:
             stim1_main.setAutoDraw(True)
         
         # *stim2_main* updates
-        if stim2_main.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        if stim2_main.status == NOT_STARTED and tThisFlip >= 0.5-frameTolerance:
             # keep track of start time/frame for later
             stim2_main.frameNStart = frameN  # exact frame index
             stim2_main.tStart = t  # local t and not account for scr refresh
@@ -791,7 +962,7 @@ for thisMainTrial in mainTrials:
             stim2_main.setAutoDraw(True)
         
         # *stim3_main* updates
-        if stim3_main.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        if stim3_main.status == NOT_STARTED and tThisFlip >= 0.5-frameTolerance:
             # keep track of start time/frame for later
             stim3_main.frameNStart = frameN  # exact frame index
             stim3_main.tStart = t  # local t and not account for scr refresh
@@ -801,7 +972,7 @@ for thisMainTrial in mainTrials:
             thisExp.timestampOnFlip(win, 'stim3_main.started')
             stim3_main.setAutoDraw(True)
         # *mouse_main* updates
-        if mouse_main.status == NOT_STARTED and t >= 0.0-frameTolerance:
+        if mouse_main.status == NOT_STARTED and t >= 0.5-frameTolerance:
             # keep track of start time/frame for later
             mouse_main.frameNStart = frameN  # exact frame index
             mouse_main.tStart = t  # local t and not account for scr refresh
@@ -841,7 +1012,7 @@ for thisMainTrial in mainTrials:
                         continueRoutine = False  # abort routine on response
         
         # *question_text_2* updates
-        if question_text_2.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        if question_text_2.status == NOT_STARTED and tThisFlip >= 0.5-frameTolerance:
             # keep track of start time/frame for later
             question_text_2.frameNStart = frameN  # exact frame index
             question_text_2.tStart = t  # local t and not account for scr refresh

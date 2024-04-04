@@ -6,23 +6,14 @@
 // store info about the experiment session:
 let expName = 'odd_one_out_experiment';  // from the Builder filename that created this script
 let expInfo = {
-    'participant': '0000',
+    'participant': '000',
     'session': '001',
 };
 
 // Start code blocks for 'Before Experiment'
 // Run 'Before Experiment' code from code
-import * as pd from 'pandas';
-var df, nMain, nPract, nTotal, sampleMain, samplePract, sampled;
-nPract = 5;
-nMain = 50;
-nTotal = (nPract + nMain);
-df = pd.read_csv("triplets.csv");
-sampled = df.sample(nTotal);
-samplePract = sampled.slice(0, nPract);
-sampleMain = sampled.slice(nPract, nTotal);
-samplePract.to_csv("practice_triplets.csv", {"index": false});
-sampleMain.to_csv("main_triplets.csv", {"index": false});
+let nPractice = 5;
+let nMain = 50;
 
 // init psychoJS:
 const psychoJS = new PsychoJS({
@@ -78,9 +69,49 @@ psychoJS.start({
   expName: expName,
   expInfo: expInfo,
   resources: [
+    {'name': 'datasets/fmri_dataset/images/C1_Images_WinterFriede(Reversed).png', 'path': 'datasets/fmri_dataset/images/C1_Images_WinterFriede(Reversed).png'},
+    {'name': 'datasets/fmri_dataset/images/NC2_Images_KekhayovPetrov(Nomate)(Reversed).png', 'path': 'datasets/fmri_dataset/images/NC2_Images_KekhayovPetrov(Nomate)(Reversed).png'},
+    {'name': 'datasets/fmri_dataset/images/NC3_Images_KazicVukovic(Nomate)(Reversed).png', 'path': 'datasets/fmri_dataset/images/NC3_Images_KazicVukovic(Nomate)(Reversed).png'},
+    {'name': 'datasets/fmri_dataset/images/NC2_Images_Replacement4(Nomate).png', 'path': 'datasets/fmri_dataset/images/NC2_Images_Replacement4(Nomate).png'},
+    {'name': 'datasets/fmri_dataset/images/C5_Images_EasyPosition6.png', 'path': 'datasets/fmri_dataset/images/C5_Images_EasyPosition6.png'},
+    {'name': 'datasets/fmri_dataset/images/C2_Images_KekhayovPetrov(Reversed).png', 'path': 'datasets/fmri_dataset/images/C2_Images_KekhayovPetrov(Reversed).png'},
+    {'name': 'datasets/fmri_dataset/images/NC4_Images_StrekalovskyShaposhlikov(Nomate).png', 'path': 'datasets/fmri_dataset/images/NC4_Images_StrekalovskyShaposhlikov(Nomate).png'},
+    {'name': 'datasets/fmri_dataset/images/C2_Images_SkujaRozenbergs(Reversed).png', 'path': 'datasets/fmri_dataset/images/C2_Images_SkujaRozenbergs(Reversed).png'},
+    {'name': 'datasets/fmri_dataset/images/C3_Images_PodzerovKuntzevic(Reversed).png', 'path': 'datasets/fmri_dataset/images/C3_Images_PodzerovKuntzevic(Reversed).png'},
+    {'name': 'datasets/fmri_dataset/images/NC2_Images_SkujaRozenbergs(Nomate)(Reversed).png', 'path': 'datasets/fmri_dataset/images/NC2_Images_SkujaRozenbergs(Nomate)(Reversed).png'},
     {'name': 'instructFrame1.png', 'path': 'instructFrame1.png'},
-    {'name': 'practice_triplets.csv', 'path': 'practice_triplets.csv'},
-    {'name': 'main_triplets.csv', 'path': 'main_triplets.csv'}
+    {'name': 'datasets/fmri_dataset/images/NC3_Images_StudybyErcoleDelRio(Nomate)(Reversed).png', 'path': 'datasets/fmri_dataset/images/NC3_Images_StudybyErcoleDelRio(Nomate)(Reversed).png'},
+    {'name': 'datasets/fmri_dataset/images/NC3_Images_Replacement5(Nomate).png', 'path': 'datasets/fmri_dataset/images/NC3_Images_Replacement5(Nomate).png'},
+    {'name': 'datasets/fmri_dataset/images/NC3_Images_Replacement3(Nomate).png', 'path': 'datasets/fmri_dataset/images/NC3_Images_Replacement3(Nomate).png'},
+    {'name': 'datasets/fmri_dataset/images/C3_Images_Replacement3.png', 'path': 'datasets/fmri_dataset/images/C3_Images_Replacement3.png'},
+    {'name': 'datasets/fmri_dataset/images/NC4_Images_BrankaWittwer(Nomate)(Reversed).png', 'path': 'datasets/fmri_dataset/images/NC4_Images_BrankaWittwer(Nomate)(Reversed).png'},
+    {'name': 'datasets/fmri_dataset/images/C3_Images_MalininAndreev(Reversed).png', 'path': 'datasets/fmri_dataset/images/C3_Images_MalininAndreev(Reversed).png'},
+    {'name': 'datasets/fmri_dataset/images/NC1_Images_WinterFriede(Nomate)(Reversed).png', 'path': 'datasets/fmri_dataset/images/NC1_Images_WinterFriede(Nomate)(Reversed).png'},
+    {'name': 'datasets/fmri_dataset/images/NC2_Images_KrauseMeinhardt(Nomate).png', 'path': 'datasets/fmri_dataset/images/NC2_Images_KrauseMeinhardt(Nomate).png'},
+    {'name': 'datasets/fmri_dataset/images/C2_Images_Replacement4.png', 'path': 'datasets/fmri_dataset/images/C2_Images_Replacement4.png'},
+    {'name': 'datasets/fmri_dataset/images/NC3_Images_TylorWinter(Nomate).png', 'path': 'datasets/fmri_dataset/images/NC3_Images_TylorWinter(Nomate).png'},
+    {'name': 'datasets/fmri_dataset/images/C1_Images_Frombeautiful.png', 'path': 'datasets/fmri_dataset/images/C1_Images_Frombeautiful.png'},
+    {'name': 'datasets/fmri_dataset/images/C3_Images_TylorWinter.png', 'path': 'datasets/fmri_dataset/images/C3_Images_TylorWinter.png'},
+    {'name': 'datasets/fmri_dataset/images/C3_Images_KazicVukovic(Reversed).png', 'path': 'datasets/fmri_dataset/images/C3_Images_KazicVukovic(Reversed).png'},
+    {'name': 'datasets/fmri_dataset/images/NC5_Images_EasyPosition2(Nomate).png', 'path': 'datasets/fmri_dataset/images/NC5_Images_EasyPosition2(Nomate).png'},
+    {'name': 'dataset.csv', 'path': 'dataset.csv'},
+    {'name': 'datasets/fmri_dataset/images/C5_Images_EasyPosition2.png', 'path': 'datasets/fmri_dataset/images/C5_Images_EasyPosition2.png'},
+    {'name': 'datasets/fmri_dataset/images/NC1_Images_SteinitzNN(Nomate).png', 'path': 'datasets/fmri_dataset/images/NC1_Images_SteinitzNN(Nomate).png'},
+    {'name': 'datasets/fmri_dataset/images/C2_Images_KrauseMeinhardt.png', 'path': 'datasets/fmri_dataset/images/C2_Images_KrauseMeinhardt.png'},
+    {'name': 'datasets/fmri_dataset/images/C5_Images_EasyPosition5(Reversed).png', 'path': 'datasets/fmri_dataset/images/C5_Images_EasyPosition5(Reversed).png'},
+    {'name': 'triplets.csv', 'path': 'triplets.csv'},
+    {'name': 'datasets/fmri_dataset/images/C4_Images_IvanchukSavchenko(Reversed).png', 'path': 'datasets/fmri_dataset/images/C4_Images_IvanchukSavchenko(Reversed).png'},
+    {'name': 'datasets/fmri_dataset/images/NC3_Images_PodzerovKuntzevic(Nomate)(Reversed).png', 'path': 'datasets/fmri_dataset/images/NC3_Images_PodzerovKuntzevic(Nomate)(Reversed).png'},
+    {'name': 'datasets/fmri_dataset/images/C3_Images_Replacement5.png', 'path': 'datasets/fmri_dataset/images/C3_Images_Replacement5.png'},
+    {'name': 'datasets/fmri_dataset/images/NC5_Images_EasyPosition5(Nomate)(Reversed).png', 'path': 'datasets/fmri_dataset/images/NC5_Images_EasyPosition5(Nomate)(Reversed).png'},
+    {'name': 'datasets/fmri_dataset/images/C3_Images_StudybyErcoledelRio(Reversed).png', 'path': 'datasets/fmri_dataset/images/C3_Images_StudybyErcoledelRio(Reversed).png'},
+    {'name': 'datasets/fmri_dataset/images/NC5_Images_EasyPosition6(Nomate).png', 'path': 'datasets/fmri_dataset/images/NC5_Images_EasyPosition6(Nomate).png'},
+    {'name': 'datasets/fmri_dataset/images/C4_Images_BrankaWittwer(Reversed).png', 'path': 'datasets/fmri_dataset/images/C4_Images_BrankaWittwer(Reversed).png'},
+    {'name': 'datasets/fmri_dataset/images/C4_Images_StrekalovskyShaposhlikov.png', 'path': 'datasets/fmri_dataset/images/C4_Images_StrekalovskyShaposhlikov.png'},
+    {'name': 'datasets/fmri_dataset/images/NC4_Images_IvanchukSavchenko(Nomate)(Reversed).png', 'path': 'datasets/fmri_dataset/images/NC4_Images_IvanchukSavchenko(Nomate)(Reversed).png'},
+    {'name': 'datasets/fmri_dataset/images/NC3_Images_MalininAndreev(Nomate)(Reversed).png', 'path': 'datasets/fmri_dataset/images/NC3_Images_MalininAndreev(Nomate)(Reversed).png'},
+    {'name': 'datasets/fmri_dataset/images/C1_Images_SteinitzNN.png', 'path': 'datasets/fmri_dataset/images/C1_Images_SteinitzNN.png'},
+    {'name': 'datasets/fmri_dataset/images/NC1_Images_Frombeautiful(Nomate).png', 'path': 'datasets/fmri_dataset/images/NC1_Images_Frombeautiful(Nomate).png'}
   ]
 });
 
@@ -109,7 +140,7 @@ async function updateInfo() {
   
 
   
-  psychoJS.experiment.dataFileName = (("." + "/") + (("data/" + expInfo["participant"]) + `/${expInfo["participant"]}_${expName}_${expInfo["date"]}`));
+  psychoJS.experiment.dataFileName = (("." + "/") + ((("data/" + "sub_") + expInfo["participant"]) + `/sub${expInfo["participant"]}_run${expInfo["session"]}_${expName}_${expInfo["date"]}`));
 
 
   return Scheduler.Event.NEXT;
@@ -693,9 +724,9 @@ function practiceTrialsLoopBegin(practiceTrialsLoopScheduler, snapshot) {
     // set up handler to look after randomisation of conditions etc
     practiceTrials = new TrialHandler({
       psychoJS: psychoJS,
-      nReps: 1, method: TrialHandler.Method.SEQUENTIAL,
+      nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
-      trialList: 'practice_triplets.csv',
+      trialList: 'triplets.csv',
       seed: undefined, name: 'practiceTrials'
     });
     psychoJS.experiment.addLoop(practiceTrials); // add the loop to the experiment
@@ -757,9 +788,9 @@ function mainTrialsLoopBegin(mainTrialsLoopScheduler, snapshot) {
     // set up handler to look after randomisation of conditions etc
     mainTrials = new TrialHandler({
       psychoJS: psychoJS,
-      nReps: 1, method: TrialHandler.Method.SEQUENTIAL,
+      nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
-      trialList: 'main_triplets.csv',
+      trialList: 'triplets.csv',
       seed: undefined, name: 'mainTrials'
     });
     psychoJS.experiment.addLoop(mainTrials); // add the loop to the experiment
@@ -825,9 +856,9 @@ function practiceRoutineBegin(snapshot) {
     frameN = -1;
     continueRoutine = true; // until we're told otherwise
     // update component parameters for each repeat
-    stim1_pract.setImage(("../datasets/fmri_dataset/images/" + Stim1));
-    stim2_pract.setImage(("../datasets/fmri_dataset/images/" + Stim2));
-    stim3_pract.setImage(("../datasets/fmri_dataset/images/" + Stim3));
+    stim1_pract.setImage(("datasets/fmri_dataset/images/" + Stim1));
+    stim2_pract.setImage(("datasets/fmri_dataset/images/" + Stim2));
+    stim3_pract.setImage(("datasets/fmri_dataset/images/" + Stim3));
     // setup some python lists for storing info about the mouse_pract
     // current position of the mouse:
     mouse_pract.x = [];
@@ -1005,7 +1036,7 @@ function practiceRoutineEachFrame() {
     }
 
     // Run 'Each Frame' code from code_pract
-    [mouseX, mouseY] = mouse_pract.getPos();
+    let [mouseX, mouseY] = mouse_pract.getPos();
     if (stim1_pract.contains(mouseX, mouseY)) {
         frame1.opacity = 1;
     } else {
@@ -1020,6 +1051,9 @@ function practiceRoutineEachFrame() {
         frame3.opacity = 1;
     } else {
         frame3.opacity = 0;
+    }
+    if ((practiceTrials.thisN === (nPractice - 1))) {
+        practiceTrials.finished = true;
     }
     
     // check for quit (typically the Esc key)
@@ -1207,9 +1241,9 @@ function experimentRoutineBegin(snapshot) {
     frameN = -1;
     continueRoutine = true; // until we're told otherwise
     // update component parameters for each repeat
-    stim1_main.setImage(("../datasets/fmri_dataset/images/" + Stim1));
-    stim2_main.setImage(("../datasets/fmri_dataset/images/" + Stim2));
-    stim3_main.setImage(("../datasets/fmri_dataset/images/" + Stim3));
+    stim1_main.setImage(("datasets/fmri_dataset/images/" + Stim1));
+    stim2_main.setImage(("datasets/fmri_dataset/images/" + Stim2));
+    stim3_main.setImage(("datasets/fmri_dataset/images/" + Stim3));
     // setup some python lists for storing info about the mouse_main
     // current position of the mouse:
     mouse_main.x = [];
@@ -1383,7 +1417,7 @@ function experimentRoutineEachFrame() {
     }
 
     // Run 'Each Frame' code from code_main
-    [mouseX, mouseY] = mouse_main.getPos();
+    let [mouseX, mouseY] = mouse_main.getPos();
     if (stim1_main.contains(mouseX, mouseY)) {
         frame1_main.opacity = 1;
     } else {
@@ -1398,6 +1432,9 @@ function experimentRoutineEachFrame() {
         frame3_main.opacity = 1;
     } else {
         frame3_main.opacity = 0;
+    }
+    if ((mainTrials.thisN === (nMain - 1))) {
+        mainTrials.finished = true;
     }
     
     // check for quit (typically the Esc key)

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2022.2.5),
-    on maart 29, 2024, at 16:31
+    on maart 31, 2024, at 23:55
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -29,21 +29,10 @@ import psychopy.iohub as io
 from psychopy.hardware import keyboard
 
 # Run 'Before Experiment' code from code
-import pandas as pd
-# Set number of trials you want to show for practice/main parts of experiment
-nPract = 10
-nMain = 10
-
-nTotal = nPract + nMain
-# Load all possible conditions from triplets.csv
-df = pd.read_csv('triplets.csv')
-sampled = df.sample(nTotal)
-# Sample practice trials and main trials
-samplePract = sampled[:nPract]
-sampleMain = sampled[nPract:nTotal]
-# Store these trials in separate files that are to be used later on
-samplePract.to_csv('practice_triplets.csv', index=False)
-sampleMain.to_csv('main_triplets.csv', index=False)
+# Set number of trials per loop. 
+# These are used in the code blocks of each loop
+nPractice = 5
+nMain = 50
 
 
 # Ensure that relative paths start from the same directory as this script
@@ -53,7 +42,7 @@ os.chdir(_thisDir)
 psychopyVersion = '2022.2.5'
 expName = 'odd_one_out_experiment'  # from the Builder filename that created this script
 expInfo = {
-    'participant': '0000',
+    'participant': '000',
     'session': '001',
 }
 # --- Show participant info dialog --
@@ -65,12 +54,12 @@ expInfo['expName'] = expName
 expInfo['psychopyVersion'] = psychopyVersion
 
 # Data file name stem = absolute path + name; later add .psyexp, .csv, .log, etc
-filename = _thisDir + os.sep + u'data/' + expInfo['participant'] + '/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])
+filename = _thisDir + os.sep + u'data/' + 'sub_' + expInfo['participant'] + '/sub%s_run%s_%s_%s' % (expInfo['participant'], expInfo['session'], expName, expInfo['date'])
 
 # An ExperimentHandler isn't essential but helps with data saving
 thisExp = data.ExperimentHandler(name=expName, version='',
     extraInfo=expInfo, runtimeInfo=None,
-    originPath='C:\\Users\\tomva\\OneDrive\\KU Leuven\\Master Theory and Research\\StudentJob\\Triplet similarity experiment\\triplet-similarity-experiment\\test\\odd_one_out_experiment_lastrun.py',
+    originPath='C:\\Users\\tomva\\OneDrive\\KU Leuven\\Master Theory and Research\\StudentJob\\Triplet similarity experiment\\Pavlovia\\odd_one_out_experiment_lastrun.py',
     savePickle=True, saveWideText=True,
     dataFileName=filename)
 # save a log file for detail verbose info
@@ -88,7 +77,7 @@ win = visual.Window(
     winType='pyglet', allowStencil=False,
     monitor='testMonitor', color=[0,0,0], colorSpace='rgb',
     blendMode='avg', useFBO=True, 
-    units='height')
+    units='norm')
 win.mouseVisible = True
 # store frame rate of monitor if we can measure it
 expInfo['frameRate'] = win.getActualFrameRate()
@@ -489,9 +478,9 @@ thisExp.nextEntry()
 routineTimer.reset()
 
 # set up handler to look after randomisation of conditions etc
-practiceTrials = data.TrialHandler(nReps=1.0, method='sequential', 
+practiceTrials = data.TrialHandler(nReps=1.0, method='random', 
     extraInfo=expInfo, originPath=-1,
-    trialList=data.importConditions('practice_triplets.csv'),
+    trialList=data.importConditions('triplets.csv'),
     seed=None, name='practiceTrials')
 thisExp.addLoop(practiceTrials)  # add the loop to the experiment
 thisPracticeTrial = practiceTrials.trialList[0]  # so we can initialise stimuli with some values
@@ -511,9 +500,9 @@ for thisPracticeTrial in practiceTrials:
     continueRoutine = True
     routineForceEnded = False
     # update component parameters for each repeat
-    stim1_pract.setImage('../datasets/fmri_dataset/images/' + Stim1)
-    stim2_pract.setImage('../datasets/fmri_dataset/images/' + Stim2)
-    stim3_pract.setImage('../datasets/fmri_dataset/images/' + Stim3)
+    stim1_pract.setImage('datasets/fmri_dataset/images/' + Stim1)
+    stim2_pract.setImage('datasets/fmri_dataset/images/' + Stim2)
+    stim3_pract.setImage('datasets/fmri_dataset/images/' + Stim3)
     # setup some python lists for storing info about the mouse_pract
     mouse_pract.x = []
     mouse_pract.y = []
@@ -697,6 +686,10 @@ for thisPracticeTrial in practiceTrials:
             frame3.opacity = 1
         else:
             frame3.opacity = 0
+            
+        # Stop routine after 5 trials  
+        if practiceTrials.thisN == (nPractice-1):
+            practiceTrials.finished = True
         
         # check for quit (typically the Esc key)
         if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
@@ -835,9 +828,9 @@ for thisComponent in pauseComponents:
 routineTimer.reset()
 
 # set up handler to look after randomisation of conditions etc
-mainTrials = data.TrialHandler(nReps=1.0, method='sequential', 
+mainTrials = data.TrialHandler(nReps=1.0, method='random', 
     extraInfo=expInfo, originPath=-1,
-    trialList=data.importConditions('main_triplets.csv'),
+    trialList=data.importConditions('triplets.csv'),
     seed=None, name='mainTrials')
 thisExp.addLoop(mainTrials)  # add the loop to the experiment
 thisMainTrial = mainTrials.trialList[0]  # so we can initialise stimuli with some values
@@ -857,9 +850,9 @@ for thisMainTrial in mainTrials:
     continueRoutine = True
     routineForceEnded = False
     # update component parameters for each repeat
-    stim1_main.setImage('../datasets/fmri_dataset/images/' + Stim1)
-    stim2_main.setImage('../datasets/fmri_dataset/images/' + Stim2)
-    stim3_main.setImage('../datasets/fmri_dataset/images/' + Stim3)
+    stim1_main.setImage('datasets/fmri_dataset/images/' + Stim1)
+    stim2_main.setImage('datasets/fmri_dataset/images/' + Stim2)
+    stim3_main.setImage('datasets/fmri_dataset/images/' + Stim3)
     # setup some python lists for storing info about the mouse_main
     mouse_main.x = []
     mouse_main.y = []
@@ -1043,6 +1036,10 @@ for thisMainTrial in mainTrials:
             frame3_main.opacity = 1
         else:
             frame3_main.opacity = 0
+        
+        # Stop routine after 5 trials  
+        if mainTrials.thisN == (nMain-1):
+            mainTrials.finished = True
         
         # check for quit (typically the Esc key)
         if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
