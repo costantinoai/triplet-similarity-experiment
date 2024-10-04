@@ -8,17 +8,6 @@ Welcome to the Triplets Similarity Experiment repository!
 
 This repository serves as a versatile starting point for your deep learning and neuroscience projects. This template provides a solid foundation for building, training, and analyzing neural networks and conducting neuroscience experiments.
 
-Key Features
-------------
-
-- **Modular Architecture**: The template follows a modular design, making it easy to organize and manage your code for different project components.
-
-- **Data Handling**: Efficient data handling utilities are included, enabling you to preprocess, augment, and load datasets effortlessly.
-
-- **Analysis Tools**: Tools for analyzing neural network activations, conducting dimensionality reduction, and visualizing results are readily available.
-
-- **Documentation**: Clear and comprehensive documentation helps you get started quickly and navigate through the project effortlessly.
-
 Project Structure
 -----------------
 
